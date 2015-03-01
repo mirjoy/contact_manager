@@ -16,6 +16,13 @@
   <% end %>
 </ul>
 
+<ul>
+  <% @person.email_addresses.each do |email| %>
+  <li><%= email.email %> <%= link_to('edit', edit_email_address_path(email), class: "emailclick") %></li>
+  <% end %>
+</ul>
+
 <p><%= link_to 'Add phone number', new_phone_number_path(person_id: @person.id) %></p>
+<p><%= link_to 'Add an email address', new_email_address_path(person_id: @person.id) %></p>
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

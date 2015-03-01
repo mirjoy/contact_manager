@@ -9,7 +9,7 @@ class EmailAddressesController < ApplicationController
   end
 
   def new
-    @email_address = EmailAddress.new
+    @email_address = EmailAddress.new(person_id: params[:person_id])
   end
 
   def edit
@@ -20,7 +20,7 @@ class EmailAddressesController < ApplicationController
 
     respond_to do |format|
       if @email_address.save
-        format.html { redirect_to @email_address, notice: 'Email address was successfully created.' }
+        format.html { redirect_to @email_address.person, notice: 'Email address was successfully created.' }
         format.json { render :show, status: :created, location: @email_address }
       else
         format.html { render :new }
@@ -29,12 +29,10 @@ class EmailAddressesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /email_addresses/1
-  # PATCH/PUT /email_addresses/1.json
   def update
     respond_to do |format|
       if @email_address.update(email_address_params)
-        format.html { redirect_to @email_address, notice: 'Email address was successfully updated.' }
+        format.html { redirect_to @email_address.person, notice: 'Email address was successfully updated.' }
         format.json { render :show, status: :ok, location: @email_address }
       else
         format.html { render :edit }
@@ -43,8 +41,6 @@ class EmailAddressesController < ApplicationController
     end
   end
 
-  # DELETE /email_addresses/1
-  # DELETE /email_addresses/1.json
   def destroy
     @email_address.destroy
     respond_to do |format|

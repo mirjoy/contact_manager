@@ -16,4 +16,9 @@ RSpec.describe EmailAddress, type: :model do
     email1.person_id = nil
     expect(email1).not_to be_valid
   end
+
+  it 'is associated with a person' do
+    expect(email1).to respond_to(:person)
+  end
+
 end
